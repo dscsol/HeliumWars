@@ -1,0 +1,108 @@
+.container {
+  width: 100%;
+  height: 100vh;
+  background: url("../media/desktop_bg_grid.jpg") no-repeat center center fixed;
+  background-size: cover;
+  object-fit: contain;
+}
+.nav {
+  max-width: 100%;
+  min-height: 100px;
+  padding: 30px 20px 15px 20px;
+  display: flex;
+  gap: 30px;
+}
+.hero {
+  max-width: 100%;
+  height: 65%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  .social {
+    padding: 15px;
+    width: 120px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    justify-content: flex-start;
+    align-items: center;
+    & > img {
+      width: 50px;
+      height: 50px;
+    }
+  }
+  .video-container {
+    max-width: 1400px;
+    height: 100%;
+    border-left: 50px solid transparent;
+    border-radius: 0 60px 0 60px;
+    border-bottom: 60px solid black;
+    border: 1px white solid;
+    background-color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 15px 50px 15px 15px;
+    video {
+      object-fit: cover;
+      padding: 30px;
+      width: 100%;
+      height: 100%;
+    }
+  }
+}
+
+.footer {
+  max-width: 100%;
+  height: calc(100% - 100px - 20px - 15px - 65%);
+  background: url("../media/desktop_footer.svg") bottom right no-repeat;
+  h2 {
+    align-self: flex-end;
+    color: white;
+    font-size: 48px;
+    font-weight: 700;
+    position: absolute;
+    bottom: 60px;
+    right: 30px;
+  }
+}
+@media only screen and (max-width: 600px) {
+  .container {
+    background: url("../media/mobile_bg_grid.jpg") no-repeat center center fixed;
+
+    background-size: cover;
+  }
+  .nav {
+    height: 25%;
+    flex-direction: column;
+    padding: 20px;
+    & > img {
+      height: 50%;
+      max-width: 100%;
+    }
+  }
+  .hero {
+    flex-direction: column-reverse;
+    height: 60%;
+    padding: 15px;
+    .social {
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      height: 100px;
+    }
+    .video-container {
+      height: calc(100% - 100px);
+      margin: 5px;
+    }
+  }
+  .footer {
+    height: calc(100% - 25% - 60%);
+    background-image: url("../media/mobile_footer.svg");
+    h2 {
+      font-size: 36px;
+    }
+  }
+}
