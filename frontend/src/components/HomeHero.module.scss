@@ -58,7 +58,27 @@
   max-width: 100%;
   height: calc(100% - 100px - 20px - 15px - 65%);
   background: url("../media/desktop_footer.svg") bottom right no-repeat;
-  h2 {
+  .subscribe-container {
+    background: url("../media/subscribe_bg.svg") center center no-repeat;
+    display: flex;
+    align-items: center;
+    background-size: 100% 100%;
+    width: 600px;
+    height: 60px;
+    input {
+      height: 100%;
+      width: 368px;
+      flex: 1;
+      position: relative;
+    }
+    button {
+      height: 100%;
+      width: 232px;
+      position: relative;
+      display: flex;
+    }
+  }
+  p {
     align-self: flex-end;
     color: white;
     font-size: 48px;
@@ -101,7 +121,7 @@
   .footer {
     height: calc(100% - 25% - 60%);
     background-image: url("../media/mobile_footer.svg");
-    h2 {
+    p {
       font-size: 36px;
     }
   }

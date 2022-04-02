@@ -13,7 +13,7 @@ function HomeHero() {
     <div className={`${styles.container}`}>
       <nav className={styles.nav}>
         <img src={logoIcon} alt="logo" />
-        <img src={logoText} alt="logo text" />
+        <img src={logoText} alt="Helium Wars" />
       </nav>
       <section className={styles.hero}>
         <div className={styles.social}>
@@ -28,7 +28,7 @@ function HomeHero() {
         </div>
       </section>
       <footer className={styles.footer}>
-        <h2>COMING SOON...</h2>
+        <p>COMING SOON...</p>
       </footer>
     </div>
   );
