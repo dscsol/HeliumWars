@@ -5,27 +5,76 @@
   background-size: cover;
   object-fit: contain;
 }
-.nav {
-  max-width: 100%;
-  min-height: 100px;
-  padding: 30px 20px 15px 20px;
-  display: flex;
-  gap: 30px;
-}
 .hero {
+  padding: 50px 50px 20px 50px;
   max-width: 100%;
-  height: 65%;
+  height: 80%;
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  .social {
-    padding: 15px;
-    width: 120px;
+  .hero-alt {
+    width: 100%;
     height: 100%;
+    background: url("../media/desktop_hero_alt_cover.svg") center center
+      no-repeat;
+    background-size: 100% 100%;
+    object-fit: cover;
+  }
+}
+.footer {
+  max-width: 100%;
+  height: calc(100% - 80%);
+  background: url("../media/desktop_footer_alt.svg") bottom left no-repeat;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  grid-template-areas:
+    "coming-soon subscribe"
+    "coming-soon social";
+  padding: 0 70px 0 70px;
+  h2 {
+    grid-area: coming-soon;
+    padding-bottom: 55px;
+    align-self: end;
+    color: white;
+    font-size: 48px;
+    font-weight: 700;
+  }
+  .subscribe-container {
+    grid-area: subscribe;
+    align-self: flex-end;
+    background: url("../media/subscribe_bg_l.svg") center center no-repeat;
     display: flex;
-    flex-direction: column;
-    gap: 10px;
+    flex-direction: row;
+    justify-self: end;
+    align-self: start;
+    background-size: 100% 100%;
+    width: 600px;
+    height: 58px;
+    input {
+      width: 352px;
+      height: 100%;
+      position: relative;
+      left: 15px;
+      bottom: 3px;
+    }
+    button {
+      width: 220px;
+      height: 100%;
+      background: none;
+      cursor: pointer;
+      position: relative;
+      left: 15px;
+      bottom: 3px;
+    }
+  }
+  .social {
+    grid-area: social;
+    justify-self: end;
+    align-self: start;
+    display: flex;
+    gap: 20px;
     justify-content: flex-start;
     align-items: center;
     & > img {
@@ -33,130 +82,78 @@
       height: 50px;
     }
   }
-  .video-container {
-    max-width: 1400px;
-    height: 100%;
-    border-left: 50px solid transparent;
-    border-radius: 0 60px 0 60px;
-    border-bottom: 60px solid black;
-    border: 1px white solid;
-    background-color: black;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 15px 50px 15px 15px;
-    video {
-      object-fit: cover;
-      padding: 30px;
-      width: 100%;
-      height: 100%;
-    }
-  }
 }
-
-.footer {
-  max-width: 100%;
-  height: calc(100% - 100px - 20px - 15px - 65%);
-  background: url("../media/desktop_footer.svg") bottom right no-repeat;
-  display: flex;
-  justify-content: space-between;
-  .subscribe-container {
-    margin: 30px 0 0 30px;
-    background: url("../media/subscribe_bg_l.svg") center center no-repeat;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    background-size: 100% 100%;
-    width: 600px;
-    height: 60px;
-
-    input {
-      width: 368px;
-      height: 60px;
-      padding: 0 10px 15px 20px;
+@media only screen and (max-width: 1130px) {
+  .footer {
+    background: url("../media/mobile_footer_alt.svg") left bottom no-repeat;
+    h2 {
+      font-size: 38px;
     }
-    button {
-      width: 232px;
-      height: 60px;
-      background: none;
-      cursor: pointer;
-    }
-  }
-  h2 {
-    margin: 30px 30px 0 0;
-
-    color: white;
-    font-size: 48px;
-    font-weight: 700;
-  }
-}
-@media only screen and (max-width: 1030px) {
-  .footer .subscribe-container {
-    width: 382px;
-    height: 48px;
-    background-image: url("../media/subscribe_bg_m.svg");
-    bottom: 70px;
-    input {
-      font-size: 18px;
-      width: 250px;
+    .subscribe-container {
+      width: 382px;
       height: 48px;
-      padding: 0 10px 0px 15px;
-    }
-    button {
-      font-size: 18px;
-      width: 132px;
-      height: 48px;
+      background-image: url("../media/subscribe_bg_m.svg");
+      input {
+        font-size: 18px;
+        width: 233px;
+        height: 100%;
+        bottom: 0;
+        left: 3;
+      }
+      button {
+        font-size: 18px;
+        width: 132px;
+        height: 100%;
+        bottom: 0;
+        left: 3;
+      }
     }
   }
 }
-@media only screen and (max-width: 828px) {
+@media only screen and (max-width: 820px) {
   .container {
     background: url("../media/mobile_bg_grid.jpg") no-repeat center center fixed;
-
     background-size: cover;
   }
-  .nav {
-    height: 20%;
-    flex-direction: column;
-    padding: 20px;
-    gap: 5px;
-    & > img {
-      height: 50%;
-      max-width: 100%;
-    }
-  }
   .hero {
-    flex-direction: column-reverse;
-    height: 60%;
-    padding: 15px;
-    .social {
-      flex-direction: row;
-      justify-content: center;
-      align-items: center;
-      height: 100px;
-    }
-    .video-container {
-      height: calc(100% - 100px);
-      margin: 5px;
+    padding: 50px 30px 30px 30px;
+    height: 70%;
+    .hero-alt {
+      background-image: url("../media/mobile_hero_alt_cover.svg");
     }
   }
   .footer {
-    height: calc(100% - 20% - 60%);
-    flex-direction: column;
-    justify-content: flex-start;
+    height: calc(100% - 70%);
+    padding: 0;
+    grid-template-columns: 100%;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-areas:
+      "social"
+      "subscribe"
+      "coming-soon";
     align-items: center;
-
-    background-image: url("../media/mobile_footer.svg");
+    justify-content: center;
+    background: url("../media/mobile_footer_alt.svg") right bottom no-repeat;
+    gap: 10px;
     .subscribe-container {
-      margin: 0;
-
-      height: 48px;
+      justify-self: center;
+    }
+    .social {
+      justify-self: center;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      gap: 7vw;
+      & > img {
+        width: 50px;
+        height: 50px;
+      }
     }
 
     h2 {
-      align-self: flex-end;
-      margin: 10px 30px 0 0;
-      font-size: 36px;
+      padding: 0 30px 55px 0;
+      justify-self: end;
+      font-size: 30px;
     }
   }
 }
