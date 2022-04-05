@@ -5,6 +5,7 @@ import linkIg from "../media/link_ig.svg";
 import linkTele from "../media/link_tele.svg";
 import linkWechat from "../media/link_wechat.svg";
 import { useRef, useState } from "react";
+import axios from "axios";
 
 function HomeHero() {
   const subEmailRef = useRef();
@@ -12,19 +13,10 @@ function HomeHero() {
   const subscribeHandler = async (e) => {
     e.preventDefault();
     const enteredSubEmail = subEmailRef.current.value;
-    console.log(enteredSubEmail);
-    console.log(JSON.stringify(enteredSubEmail));
-
-    const res = await fetch("http://localhost:8000/subscribe", {
-      method: "POST",
-      body: JSON.stringify(enteredSubEmail),
-      headers: {
-        "Content-Type": "application/json",
-      },
+    await axios.post(`${process.env.REACT_APP_BACKEND}/subscribe`, {
+      email: enteredSubEmail,
     });
-    const data = await res.json();
     setIsSubmit(true);
-    console.log(data);
   };
   return (
     <div className={`${styles.container}`}>
