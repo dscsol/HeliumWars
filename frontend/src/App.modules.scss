@@ -6,3 +6,19 @@
   padding: 0;
   font-family: "Roboto", sans-serif;
 }
+input {
+  border: none;
+  outline: none;
+  background: none;
+  font-size: 24px;
+  color: white;
+}
+::placeholder {
+  color: #d2cecd;
+}
+button {
+  outline: none;
+  border: none;
+  font-size: 24px;
+  font-weight: 600;
+}
