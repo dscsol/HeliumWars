@@ -14,7 +14,7 @@ function HomeHero() {
     e.preventDefault();
     const enteredSubEmail = subEmailRef.current.value;
     await axios
-      .post(`${process.env.REACT_APP_BACKEND}/subscribe`, {
+      .post("/api/subscribe", {
         email: enteredSubEmail,
       })
       .catch((err) => {

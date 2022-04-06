@@ -8,7 +8,7 @@ class Router {
   }
   router() {
     const router = express.Router();
-    router.post("/subscribe", this.addSubscriber.bind(this));
+    router.post("/api/subscribe", this.addSubscriber.bind(this));
     return router;
   }
 
