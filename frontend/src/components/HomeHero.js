@@ -13,9 +13,13 @@ function HomeHero() {
   const subscribeHandler = async (e) => {
     e.preventDefault();
     const enteredSubEmail = subEmailRef.current.value;
-    await axios.post(`${process.env.REACT_APP_BACKEND}/subscribe`, {
-      email: enteredSubEmail,
-    });
+    await axios
+      .post(`${process.env.REACT_APP_BACKEND}/subscribe`, {
+        email: enteredSubEmail,
+      })
+      .catch((err) => {
+        console.log(err);
+      });
     setIsSubmit(true);
   };
   return (

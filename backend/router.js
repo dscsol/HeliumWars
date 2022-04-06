@@ -14,8 +14,8 @@ class Router {
 
   async addSubscriber(req, res) {
     let email = req.body.email;
-    await this.Method.addSubscriber(email);
-    res.end();
+    let response = await this.Method.addSubscriber(email);
+    res.send(response);
   }
 }
 module.exports = Router;
