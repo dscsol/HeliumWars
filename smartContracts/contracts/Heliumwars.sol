@@ -91,6 +91,11 @@ contract Heliumwars is ERC721, ERC721Enumerable, ERC721URIStorage, Ownable {
         }
     }
 
+    function withdraw() public onlyOwner {
+        uint256 balance = address(this).balance;
+        payable(msg.sender).transfer(balance);
+    }
+
     // The following functions are overrides required by Solidity.
 
     function _beforeTokenTransfer(
