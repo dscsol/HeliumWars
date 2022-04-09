@@ -9,6 +9,7 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 contract Heliumwars is ERC721, ERC721Enumerable, ERC721URIStorage, Ownable {
     bool public publicSaleIsActive = false;
     bool public whitelistSaleIsActive = false;
+    bool public revealIsActive = false;
     string private baseURI;
     uint256 public constant MAX_SUPPLY = 8888;
     uint256 public constant MAX_PUBLIC_MINT = 1;
@@ -25,12 +26,28 @@ contract Heliumwars is ERC721, ERC721Enumerable, ERC721URIStorage, Ownable {
         return baseURI;
     }
 
+    function setRevealedURI(string memory uri) external onlyOwner {
+        uint256 ts = totalSupply();
+        require(revealIsActive, "reveal is not active");
+        baseURI = uri;
+        for (uint256 i = 0; i < ts; i++) {
+            _setTokenURI(
+                i,
+                string(abi.encodePacked(Strings.toString(i), ".json"))
+            );
+        }
+    }
+
     function setPublicSaleState(bool newState) external onlyOwner {
         publicSaleIsActive = newState;
     }
 
     function setWhitelistSaleState(bool newState) external onlyOwner {
         whitelistSaleIsActive = newState;
+    }
+
+    function setRevealState(bool newState) external onlyOwner {
+        revealIsActive = newState;
     }
 
     function setWhiteList(address[] calldata addresses, uint8 numAllowedToMint)
@@ -65,7 +82,6 @@ contract Heliumwars is ERC721, ERC721Enumerable, ERC721URIStorage, Ownable {
         _whitelist[msg.sender] -= numberOfTokens;
         for (uint256 i = 0; i < numberOfTokens; i++) {
             _safeMint(msg.sender, ts + i);
-            _setTokenURI(ts + i, Strings.toString(ts + i));
         }
     }
 
@@ -87,7 +103,6 @@ contract Heliumwars is ERC721, ERC721Enumerable, ERC721URIStorage, Ownable {
 
         for (uint256 i = 0; i < numberOfTokens; i++) {
             _safeMint(msg.sender, ts + i);
-            _setTokenURI(ts + i, Strings.toString(ts + i));
         }
     }
 
