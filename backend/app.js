@@ -6,7 +6,6 @@ app.use(cors());
 app.use(express.static("public"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-const http = require("http").Server(app);
 
 const knexFile = require("./knexfile").development;
 const knex = require("knex")(knexFile);
@@ -17,6 +16,6 @@ let router = new Router(method);
 
 app.use("/", router.router());
 
-http.listen(8000, () => {
-  console.log(`Server running on port: 8000`);
+app.listen(8080, () => {
+  console.log(`Server running on port: 8080`);
 });

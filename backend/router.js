@@ -8,14 +8,14 @@ class Router {
   }
   router() {
     const router = express.Router();
-    router.post("/subscribe", this.addSubscriber.bind(this));
+    router.post("/api/subscribe", this.addSubscriber.bind(this));
     return router;
   }
 
   async addSubscriber(req, res) {
     let email = req.body.email;
-    await this.Method.addSubscriber(email);
-    res.end();
+    let response = await this.Method.addSubscriber(email);
+    res.send(response);
   }
 }
 module.exports = Router;
