@@ -42,21 +42,21 @@ function HomeHero() {
         </div>
         <h2>COMING SOON...</h2>
         <div className={styles.social}>
-          <a href="">
+          {/* <a href="">
             <img src={linkDc} alt="discord" />
-          </a>
+          </a> */}
           <a href="https://twitter.com/helium_warz?s=21">
             <img src={linkTwitter} alt="twitter" />
           </a>
           <a href="https://www.instagram.com/helium_wars/">
             <img src={linkIg} alt="Instagram" />
           </a>
-          <a href="">
+          {/* <a href="">
             <img src={linkTele} alt="Telegram" />
           </a>
           <a href="">
             <img src={linkWechat} alt="Wechat" />
-          </a>
+          </a> */}
         </div>
       </footer>
     </div>
