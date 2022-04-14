@@ -4,20 +4,31 @@ pragma solidity ^0.8.4;
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
-import "@openzeppelin/contracts/access/Ownable.sol";
+import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Burnable.sol";
+import "@openzeppelin/contracts/access/AccessControl.sol";
 
-contract Heliumwars is ERC721, ERC721Enumerable, ERC721URIStorage, Ownable {
+contract Heliumwars is
+    ERC721,
+    ERC721Enumerable,
+    ERC721URIStorage,
+    AccessControl
+{
+    bytes32 public constant ADMIN = keccak256("ADMIN");
+    bytes32 public constant TREASURY = keccak256("TREASURY");
     bool public publicSaleIsActive = false;
     bool public whitelistSaleIsActive = false;
+    bool public revealIsActive = false;
     string private baseURI;
     uint256 public constant MAX_SUPPLY = 8888;
     uint256 public constant MAX_PUBLIC_MINT = 1;
     uint256 public constant PRICE_PER_TOKEN = 0.12 ether;
     mapping(address => uint8) private _whitelist;
 
-    constructor() ERC721("Heliumwars", "HELIUMWARS") {}
+    constructor() ERC721("Heliumwars", "HELIUMWARS") {
+        _grantRole(DEFAULT_ADMIN_ROLE, msg.sender);
+    }
 
-    function setBaseURI(string memory uri) external onlyOwner {
+    function setBaseURI(string memory uri) external onlyRole(ADMIN) {
         baseURI = uri;
     }
 
@@ -25,17 +36,33 @@ contract Heliumwars is ERC721, ERC721Enumerable, ERC721URIStorage, Ownable {
         return baseURI;
     }
 
-    function setPublicSaleState(bool newState) external onlyOwner {
+    function setRevealedURI(string memory uri) external onlyRole(ADMIN) {
+        uint256 ts = totalSupply();
+        require(revealIsActive, "reveal is not active");
+        baseURI = uri;
+        for (uint256 i = 0; i < ts; i++) {
+            _setTokenURI(
+                i,
+                string(abi.encodePacked(Strings.toString(i), ".json"))
+            );
+        }
+    }
+
+    function setPublicSaleState(bool newState) external onlyRole(ADMIN) {
         publicSaleIsActive = newState;
     }
 
-    function setWhitelistSaleState(bool newState) external onlyOwner {
+    function setWhitelistSaleState(bool newState) external onlyRole(ADMIN) {
         whitelistSaleIsActive = newState;
+    }
+
+    function setRevealState(bool newState) external onlyRole(ADMIN) {
+        revealIsActive = newState;
     }
 
     function setWhiteList(address[] calldata addresses, uint8 numAllowedToMint)
         external
-        onlyOwner
+        onlyRole(ADMIN)
     {
         for (uint256 i = 0; i < addresses.length; i++) {
             _whitelist[addresses[i]] = numAllowedToMint;
@@ -65,7 +92,6 @@ contract Heliumwars is ERC721, ERC721Enumerable, ERC721URIStorage, Ownable {
         _whitelist[msg.sender] -= numberOfTokens;
         for (uint256 i = 0; i < numberOfTokens; i++) {
             _safeMint(msg.sender, ts + i);
-            _setTokenURI(ts + i, Strings.toString(ts + i));
         }
     }
 
@@ -87,11 +113,10 @@ contract Heliumwars is ERC721, ERC721Enumerable, ERC721URIStorage, Ownable {
 
         for (uint256 i = 0; i < numberOfTokens; i++) {
             _safeMint(msg.sender, ts + i);
-            _setTokenURI(ts + i, Strings.toString(ts + i));
         }
     }
 
-    function withdraw() public onlyOwner {
+    function withdraw() public onlyRole(TREASURY) {
         uint256 balance = address(this).balance;
         payable(msg.sender).transfer(balance);
     }
@@ -125,7 +150,7 @@ contract Heliumwars is ERC721, ERC721Enumerable, ERC721URIStorage, Ownable {
     function supportsInterface(bytes4 interfaceId)
         public
         view
-        override(ERC721, ERC721Enumerable)
+        override(ERC721, ERC721Enumerable, AccessControl)
         returns (bool)
     {
         return super.supportsInterface(interfaceId);
